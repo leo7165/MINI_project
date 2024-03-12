@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+		  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<typeAlias type="a.b.c.com.os.mem.vo.OsMemVO" alias="osmemvo"/>	
+		<typeAlias type="a.b.c.com.os.lecture.vo.OsLectureVO" alias="oslecturevo"/>
+  		<typeAlias type="a.b.c.com.os.kart.vo.OsKartVO" alias="oskartvo"/>	
+		<typeAlias type="a.b.c.com.os.rboard.vo.OsRboardVO" alias="osrboardvo"/>
+		
+	</typeAliases>
+</configuration>
