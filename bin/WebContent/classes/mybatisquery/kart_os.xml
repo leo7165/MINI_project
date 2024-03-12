@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+          
+<mapper namespace="a.b.c.com.os.kart.dao.OsKartDAO">
+
+<select id = "osKartSelectAll" parameterType = "oskartvo" resultType="oskartvo">
+
+SELECT 			A.KNUM 		KNUM
+		       ,A.LNAME 		LNAME
+		       ,A.LPRICE 		LPRICE
+		       ,A.LPRICESUM 	LPRICESUM
+		       ,A.LNUM 			LNUM
+		       ,A.MNUM 			MNUM
+		       ,A.DELETEYN 	DELETEYN
+		       	  
+		FROM 	KART_TABLE A
+		WHERE 	A.DELETEYN = 'Y'
+    <!--AND 	A.KMNUM = #{kmnum}--> 	
+		ORDER BY 1 DESC  
+
+	
+</select>
+
+<update id="osKartDelete" parameterType="oskartvo">
+
+		UPDATE KART_TABLE
+		SET DELETEYN = 'N'
+		WHERE KNUM = #{knum}
+
+</update>
+
+<update id="osKartDeleteArray" parameterType="oskartvo" >
+	<foreach collection="list" item="item" index="index" separator=";" open="DECLARE BEGIN" close="; END;"> 
+		UPDATE 	KART_TABLE 
+		SET 	DELETEYN = 'N'		
+		WHERE KNUM = #{item.knum} 
+	</foreach>
+</update>
+
+<insert id="osKartInsert" parameterType="oskartvo">
+	INSERT INTO KART_TABLE (KNUM, LNAME, LPRICE,LNUM,DELETEYN)
+				VALUES(
+						(SELECT NVL(MAX(A.KNUM), 0) + 1 AS CHABUN FROM KART_TABLE A),
+						#{lname},
+						#{lprice},
+						#{lnum},
+						'Y'
+					)
+</insert>
+
+
+
+</mapper>
